@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 int space_char(char c){
- return (c== ' ' || c== '\t');
+  return (c== ' ' || c== '\t');
 }
 
 int non_space_char(char c){
-  return (c = '\0') ? 0 : !space_char(c);
+  return (c == '\0') ? 0 : !space_char(c);
 }
 
 char *token_start(char *str){
@@ -40,7 +40,7 @@ char *copy_str(char *inStr, short len){
   //nwStr = inStr(len)
     //return nwStr
 
-  char *nwStr = calloc((len + 1) * sizeof(char), 1);
+  char *nwStr = calloc(len + 1, sizeof(char));
   for(int i = 0; i < len; i++){
     nwStr[i] = inStr[i];
     if(nwStr[i] == '\0'){
@@ -54,7 +54,6 @@ char **tokenize(char *str){
   int word_length = count_tokens(str); // takes the length of how many words are in a string as a number
   char **word = calloc((word_length + 1) * sizeof(char*), 1); // taking unused memory and allocs as used memory and return the first add of that memory
   for(int i = 0; i < word_length; i++){
-    printf("aaaaaaaaa");
     char* start = token_start(str);
     str = token_terminator(start);
     word[i] = copy_str(start, str - start);
@@ -68,7 +67,7 @@ char **tokenize(char *str){
 void print_tokens(char **tokens){
   int i = 0;
   while(tokens[i] != NULL){
-    printf(tokens[i] + '\n');
+    printf("%s\n", tokens[i]);
     i++;
   }
 }

@@ -17,15 +17,14 @@ int main()
     fflush(stdout);
     char k[500];
     fgets(k, 500, stdin);
-    fputs(k, stdout);
+    //fputs(k, stdout);
     fflush(stdout);
       
-    //k[strcspn(k, "\n")] = 0;
-    printf(k);
+    k[strcspn(k, "\n")] = '\0';
+    //printf(k);
 
     toks = tokenize(k);
     print_tokens(toks);
-    add_history(hist, k);
     free_tokens(toks);
      
     switch(k[0]){
@@ -34,6 +33,7 @@ int main()
 	return 0;
       case 'h':
 	print_history(hist);
+	break;
       case '!':
 	histo = get_history(hist, atoi(k + 1));
 	if(histo != NULL){
@@ -46,9 +46,14 @@ int main()
 	else{
 	  printf("Invalid history index \n");
 	}
+	break;
     default:
-      break;
+      add_history(hist, k);
+      
     }
+    
   }
-  free_history(hist);    
+  // free_tokens(toks);
+  free_history(hist);
+  return 0;
 }
